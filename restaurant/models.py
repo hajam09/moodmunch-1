@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
-from user.models import RestaurantAccount, CustomerAccount
+#from mooduser.models import RestaurantAccount, CustomerAccount
 
 class Restaurant(models.Model):
-        userID = models.ForeignKey(RestaurantAccount, on_delete=models.CASCADE)
+        userID = models.ForeignKey('user.RestaurantAccount', on_delete=models.CASCADE)
         licenseID = models.CharField(max_length=10)
         rName = models.CharField(max_length=50)
         location = models.CharField(max_length=6)
@@ -29,7 +29,7 @@ class Review(models.Model):
         emoji = models.CharField(max_length=1)
 
 class Reservation(models.Model):
-        customerID = models.ForeignKey(CustomerAccount, on_delete=models.CASCADE)
+        customerID = models.ForeignKey('user.CustomerAccount', on_delete=models.CASCADE)
         restaunrantID = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
         numOfSeats = models.IntegerField(default=0)
         date = models.DateTimeField()
